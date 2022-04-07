@@ -1,3 +1,4 @@
 FROM openjdk:11
-COPY *.jar /myapp.jar
-ENTRYPOINT ["java", "-jar", "myapp.jar"]
+COPY . /usr/src/myapp
+WORKDIR /usr/src/myapp
+ENTRYPOINT ["java", "-jar", "*.jar"]
