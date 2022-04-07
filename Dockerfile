@@ -1,4 +1,4 @@
 FROM lolhens/baseimage-openjre
-ADD target/springbootApp.jar springbootApp.jar
+COPY . .
 EXPOSE 80
 ENTRYPOINT ["java", "-jar", "springbootApp.jar"]
