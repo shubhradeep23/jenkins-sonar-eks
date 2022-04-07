@@ -1,4 +1,3 @@
-FROM lolhens/baseimage-openjre
-COPY . .
-EXPOSE 80
-ENTRYPOINT ["java", "-jar", "springbootApp.jar"]
+FROM openjdk:11-jre-alpine
+COPY target/*.jar /myapp.jar
+ENTRYPOINT ["java", "-jar", "myapp.jar"]
