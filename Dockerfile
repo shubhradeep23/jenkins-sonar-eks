@@ -1,7 +1,7 @@
 FROM openjdk:11
 
 ARG JAR_FILE=target/*.jar
-ARG JAR_LIB_FILE=target/lib/
+#ARG JAR_LIB_FILE=target/lib/
 
 # cd /usr/local/runme
 WORKDIR /usr/local/runme
@@ -11,7 +11,7 @@ COPY ${JAR_FILE} app.jar
 
 # copy project dependencies
 # cp -rf target/lib/  /usr/local/runme/lib
-ADD ${JAR_LIB_FILE} lib/
+#ADD ${JAR_LIB_FILE} lib/
 
 # java -jar /usr/local/runme/app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
