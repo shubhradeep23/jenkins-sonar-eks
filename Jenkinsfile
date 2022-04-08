@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-/*          stage("build & SonarQube analysis") {
+          stage("build & SonarQube analysis") {
             agent any
             steps {
               withSonarQubeEnv('sonar') {
@@ -77,7 +77,7 @@ pipeline {
         always {
           cleanWs()
         }
-*/      }
+      }
     }
 
       
