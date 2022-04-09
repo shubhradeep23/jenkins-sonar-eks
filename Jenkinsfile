@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-          stage("build & SonarQube analysis") {
+          stage("SonarQube analysis") {
             agent any
             steps {
               withSonarQubeEnv('sonar') {
@@ -45,14 +45,14 @@ pipeline {
               }
             }
           }
-          stage('Building image') {
+          stage('Building docker image') {
             steps{
               script {
                 dockerImage = docker.build imagename
               }
             }
           }
-          stage('Deploy Image') {
+          stage('Push Image to Docker Registry') {
             steps{
               script {
                 docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
