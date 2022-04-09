@@ -4,10 +4,10 @@ ARG JAR_FILE=target/*.jar
 #ARG JAR_LIB_FILE=target/lib/
 
 # cd /usr/local/runme
-WORKDIR /usr/local/runme
-
+#WORKDIR /usr/local/runme
+WORKDIR /opt
 # copy target/find-links.jar /usr/local/runme/app.jar
-COPY ${JAR_FILE} app.jar
+COPY ${JAR_FILE} /opt/app.jar
 
 # copy project dependencies
 # cp -rf target/lib/  /usr/local/runme/lib
