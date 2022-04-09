@@ -63,7 +63,7 @@ pipeline {
             }
           }
         }
-           stage('K8S Deploy') {
+           stage('Deploy to Kubernetes Cluster (EKS)') {
              steps{   
               script {
                 withKubeConfig([credentialsId: 'eks-shubhradeep', serverUrl: '']) {
@@ -72,7 +72,16 @@ pipeline {
        }
      }
    }
-}
+/*           stage('Curl ELB url to test if App is reachable') {
+             steps{
+               script {
+                 retry(5) {
+                   sh 'curl <elb-url>/greeting'
+                 }
+               }
+             }
+           }
+*/}
       post {
         always {
           cleanWs()
