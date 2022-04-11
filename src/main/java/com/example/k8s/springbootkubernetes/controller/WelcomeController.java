@@ -8,7 +8,7 @@ public class WelcomeController {
 	
 	@RequestMapping("/greeting")
 	public String greeting() {
-		return "Welcome to Diptos Channel";
+		return "<h1>Welcome to Diptos Channel</h1>";
 	}
 
 }
