@@ -3,8 +3,6 @@ pipeline {
           imagename = "shubhradeepghosh23/java:latest"
           registryCredential = 'dockerhub-creds'
           dockerImage = ''
-          CHECK_URL = "http://ab9c36cede9ba45ebb3afe04dfa4dadd-1171579923.us-east-1.elb.amazonaws.com/greeting"
-          CMD = "curl --write-out %{http_code} --silent --output /dev/null ${CHECK_URL}"
     }
         agent any
         tools {
@@ -67,35 +65,23 @@ pipeline {
         }
            stage('Deploy to Kubernetes Cluster (EKS)') {
              steps{   
-               script {
-                 withKubeConfig([credentialsId: 'eks-shubhradeep', serverUrl: '']) {
-                 sh ('kubectl apply -f eks-deploy-k8s.yaml')
+              script {
+                withKubeConfig([credentialsId: 'eks-shubhradeep', serverUrl: '']) {
+                sh ('kubectl apply -f eks-deploy-k8s.yaml')
          }
        }
      }
    }
-           stage('Health Check Stage-One') {
-             steps {
-               script{
-                 sh "${CMD} > commandResult"
-                 env.status = readFile('commandResult').trim()
-                }
-            }
-        }
-           stage('Health Check Stage-Two') {
-             steps {
+/*           stage('Curl ELB url to test if App is reachable') {
+             steps{
                script {
-                 sh "echo ${env.status}"
-                   if (env.status == '200') {
-                     currentBuild.result = "SUCCESS"
-                  }
-                   else {
-                     currentBuild.result = "FAILURE"
-                  }
-              }
-          }
-      }
-}
+                 retry(5) {
+                   sh 'curl <elb-url>/greeting'
+                 }
+               }
+             }
+           }
+*/}
       post {
         always {
           emailext body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS! \n Check console output at $BUILD_URL to view the results.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
