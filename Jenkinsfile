@@ -3,7 +3,7 @@ pipeline {
           imagename = "shubhradeepghosh23/java:latest"
           registryCredential = 'dockerhub-cred'
           dockerImage = ''
-          CHECK_URL = "http://ab9c36cede9ba45ebb3afe04dfa4dadd-1171579923.us-east-1.elb.amazonaws.com/greeting"
+          CHECK_URL = "http://ac7b121774a0545998dc7f7cf3da9103-1971609098.us-east-1.elb.amazonaws.com/greeting"
           CMD = "curl --write-out %{http_code} --silent --output /dev/null ${CHECK_URL}"
     }
         agent any
@@ -69,8 +69,8 @@ pipeline {
              steps{   
                script {
                  withKubeConfig([credentialsId: 'eks-shubhradeep', serverUrl: '']) {
-                 sh ('kubectl delete service/springboot-app') 
-                 sleep 5 
+//                 sh ('kubectl delete service/springboot-app') 
+//                sleep 5 
                  sh ('kubectl apply -f eks-deploy-k8s.yaml')
          }
        }
