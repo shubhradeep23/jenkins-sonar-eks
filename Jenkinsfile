@@ -76,11 +76,13 @@ pipeline {
    }
            stage('Health Check Stage-One') {
              steps {
+               retry(10) {
                script{
                  sh "${CMD} > commandResult"
                  env.status = readFile('commandResult').trim()
                 }
             }
+          }  
         }
            stage('Health Check Stage-Two') {
              steps {
