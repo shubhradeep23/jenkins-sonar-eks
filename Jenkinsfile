@@ -1,7 +1,7 @@
 pipeline {
         environment {
           imagename = "shubhradeepghosh23/java:latest"
-          registryCredential = 'dockerhub-creds'
+          registryCredential = 'dockerhub-cred'
           dockerImage = ''
           CHECK_URL = "http://ab9c36cede9ba45ebb3afe04dfa4dadd-1171579923.us-east-1.elb.amazonaws.com/greeting"
           CMD = "curl --write-out %{http_code} --silent --output /dev/null ${CHECK_URL}"
