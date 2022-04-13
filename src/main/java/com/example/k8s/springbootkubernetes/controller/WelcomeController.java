@@ -8,7 +8,7 @@ public class WelcomeController {
 	
 	@RequestMapping("/greeting")
 	public String greeting() {
-		return "Deploy Java App to AWS EKS by Shubhradeep";
+		return "Deploy Java App to AWS EKS by Shubhradeep Ghosh";
 	}
 
 }
