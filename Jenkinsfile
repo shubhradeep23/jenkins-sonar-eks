@@ -69,6 +69,8 @@ pipeline {
              steps{   
                script {
                  withKubeConfig([credentialsId: 'eks-shubhradeep', serverUrl: '']) {
+                 sh ('kubectl delete service/springboot-app') 
+                 sleep 5 
                  sh ('kubectl apply -f eks-deploy-k8s.yaml')
          }
        }
